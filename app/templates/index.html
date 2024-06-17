@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aniverse - Home</title>
+</head>
+<body>
+    <h1>Welcome to Aniverse!</h1>
+    <p>This is a cool anime web application.</p>
+
+    <h2>Anime List</h2>
+    <ul id="anime-list">
+        <!-- Anime list items will be populated dynamically via JavaScript or Flask -->
+    </ul>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/api/animes')
+                .then(response => response.json())
+                .then(data => {
+                    const animeList = document.getElementById('anime-list');
+                    data.forEach(anime => {
+                        const li = document.createElement('li');
+                        li.textContent = `${anime.title} - ${anime.genre} (${anime.episodes} episodes)`;
+                        animeList.appendChild(li);
+                    });
+                })
+                .catch(error => console.error('Error fetching anime data:', error));
+        });
+    </script>
+</body>
+</html>
